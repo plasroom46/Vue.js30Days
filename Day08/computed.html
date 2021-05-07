@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <label for="firstname">Firstname</label>
+        <input type="text" name="firstname"  v-model="firstName">
+        <label for="lastname">Lasttname</label>
+        <input type="text" name="lastname" v-model="lastName">
+        <h2>{{fullName}}</h2>
+        <h2>{{fullName}}</h2>
+        <h2>{{fullName}}</h2>
+        <h3>{{firstName}} {{lastName}}</h3>
+        <h3>{{getFullName()}}</h3>
+        <h3>{{getFullName()}}</h3>
+        <h3>{{getFullName()}}</h3>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vue = new Vue({
+            el: '#app',
+            data: {
+                firstName: 'c',
+                lastName: 'cw'
+            },
+            methods: {
+              getFullName() {
+                console.log('method has been called')
+                return `${this.firstName} ${this.lastName}`
+              }
+            },
+            computed: {
+              fullName() {
+                console.log('computed has been called')
+                return this.firstName + ' ' + this.lastName
+              }
+            }
+        })
+    </script>
+</body>
+
+</html>

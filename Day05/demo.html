@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Use preprocessors via the lang attribute! e.g. <style lang="scss"> -->
+    <style>
+        #app {
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-flow: column;
+            align-items: center;
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 60px;
+        }
+
+        a,
+        button {
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        button {
+            background: none;
+            border: solid 1px;
+            border-radius: 2em;
+            font: inherit;
+            padding: 0.5em 0.8em;
+        }
+
+        .form-container {
+            margin-top: 1.5em;
+            height: 30vh;
+            border: .3px solid #222;
+            border-radius: 5px;
+            padding: 1.5em 1.2em;
+            width: 50vw;
+        }
+
+        input {
+            border-radius: 5rem;
+            outline: 0;
+            background-color: #fff;
+        }
+
+        .input-group {
+            margin: 5px 0;
+        }
+
+        label,
+        button {
+            font-size: 14px;
+            font-weight: 900;
+            outline: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 :style="{color:textColor}">{{message}}</h1>
+        <input type="text" v-model="message">
+        <div class="form-container">
+            <form>
+                <h2>模擬送出表單</h2>
+                <div class="input-group">
+                    <label for="username">請輸入帳號: </label>
+                    <input type="text" name="username" v-model="username" v-focus>
+                </div>
+                <div class="input-group">
+                    <label for="password">請輸入密碼: </label>
+                    <input type="password" name="password" v-model="password">
+                </div>
+                <button @click.prevent="handleSubmit">送出</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        let vue = new Vue({
+            el: '#app',
+            data: {
+                message: '你好 我是 ccw.',
+                textColor: 'red',
+                username: '',
+                password: ''
+            },
+            methods: {
+                handleSubmit() {
+                    alert(`你所輸入的帳號是: ${this.username} \n而你所輸入的密碼是${this.password}`);
+                }
+            },
+            directives: {
+                // 你的客製化指令名稱
+                focus: {
+                    // 你想在哪個時間點執行什麼操作
+                    inserted: function (el) {
+                        el.focus()
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -27,21 +27,29 @@
             padding: 0.75em 2em;
         }
     </style>
-    
+
 </head>
 
 <body>
     <div id="app">
         <h1>{{message}}</h1>
+        <!-- 上下寫法等價 -->
+        <!-- <button v-on:click="greet">Click Me</button> -->
+        <button @Click="greet">Click Me</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         let vm = new Vue({
             el: '#app',
             data: {
-              message: '30天內教你學會vue.js',
+                message: '30天內教你學會vue.js',
             },
-          })
+            methods: {
+                greet() {
+                    alert('Hello, I am ccw.')
+                }
+            }
+        })
     </script>
 </body>
 

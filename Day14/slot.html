@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo for slot</title>
+    <style>
+        #app {
+            font-family: Avenir, Helvetica, Arial, sans-serif;
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 60px;
+        }
+
+        a,
+        button {
+            color: #4fc08d;
+        }
+
+        button {
+            background: none;
+            border: solid 1px;
+            border-radius: 2em;
+            font: inherit;
+            padding: 0.75em 2em;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <post>
+            <h1>這就是slot的啦~!</h1>
+        </post>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        // 如果 post內沒有內容會顯示slot內的訊息
+        Vue.component("post", {
+            template: `
+            <div>
+              <slot>如果沒有內容，那我就印出這行字囉</slot>
+            </div>
+            `,
+        });
+    </script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {}
+        })
+    </script>
+</body>
+
+</html>

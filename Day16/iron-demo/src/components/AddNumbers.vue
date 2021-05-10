@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { EventBus } from "../EventBus.js"; // 引入EventBus實體
 export default {
   data() {
     return {
@@ -20,7 +21,7 @@ export default {
   },
   methods: {
     addNumber() {
-      console.log(this.number);
+      EventBus.$emit("addNumber", parseInt(this.number));
     },
   },
 };

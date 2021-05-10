@@ -83,8 +83,9 @@
     <!-- after vue component -->
     <div id="app">
         <h1>My Todo List</h1>
-        <todo-list v-for="todo in todos" :key="todo.id" :todo="todo"></todo-list>
-      </div>
+        <todo-list v-for="todo in todos" :key="todo.id" :todo="todo" @delete-todo="handleDeleteTodo">
+        </todo-list>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
         const todos = [{
@@ -112,7 +113,7 @@
                 </div>
                 <div class="todo-icons">
                   <i class="fa fa-check" aria-hidden="true"></i>
-                  <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                  <i class="fa fa-trash-alt" aria-hidden="true" @click="deleteTodo"></i> 
                 </div>
               </div>
             `,
@@ -121,15 +122,35 @@
                     type: Object,
                     required: true
                 }
+            },
+            methods: { // 加入methods屬性
+                deleteTodo() {
+                    this.$emit('delete-todo', {
+                        title: this.todo.title
+                    })
+                }
             }
         });
+
         let vm = new Vue({
             el: '#app',
             data: {
                 message: "Welcome to Vue!",
                 todos: todos
             },
-            methods: {}
+            methods: {
+                // 2個方法等價
+                /*
+                handleDeleteTodo({ title }) {
+                    console.log(title);
+                    this.todos = this.todos.filter(item => item.title !== title)
+                },
+                */
+                handleDeleteTodo(payload) {
+                    console.log(payload.title);
+                    this.todos = this.todos.filter(item => item.title !== payload.title)
+                }
+            }
         })
     </script>
 </body>

@@ -1,5 +1,11 @@
 # weather
 
+## [Add Open Weather API Key](https://home.openweathermap.org/api_keys)
+在根目錄新增檔案.env，內容如下
+```cmd=
+VUE_APP_WEATHER_KEY=你的API KEY
+```
+
 ## Project setup
 ```
 npm install

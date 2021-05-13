@@ -3,30 +3,40 @@ import { Line } from 'vue-chartjs'
 
 export default {
   extends: Line,
-  mounted() {
-    const dates = [
-      '2020/07/05',
-      '2020/07/06',
-      '2020/07/07',
-      '2020/07/08',
-      '2020/07/09',
-      '2020/07/10',
-    ]
-    const totals = [50, 40, 71, 51, 25, 49]
 
-    this.renderChart({
-      labels: dates,
-      datasets: [
-        {
-          label: 'demo',
-          data: totals,
-        },
-      ],
+  // 加入基本的資料驗證
+  props: {
+    label: {
+      type: String,
     },
-    {
-      responsive: true,
-      maintainAspectRatio: false,
-    })
+    chartData: {
+      type: Array,
+    },
+    options: {
+      type: Object,
+    },
+    chartColorOptions: {
+      type: Object,
+    },
   },
-}
+  mounted() {
+    // 從傳入的資料中取出數字與日期，並將其反轉(因為我們拿到的是最新到最舊的資料)
+    const dates = this.chartData.map((d) => d.date).reverse();
+    const totals = this.chartData.map((d) => d.total).reverse();
+
+    this.renderChart(
+      {
+        labels: dates,
+        datasets: [
+          {
+            label: this.label,
+            data: totals,
+            ...this.chartColorOptions,
+          },
+        ],
+      },
+      this.options
+    );
+  },
+};
 </script>

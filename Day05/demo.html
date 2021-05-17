@@ -70,7 +70,8 @@
                 <h2>模擬送出表單</h2>
                 <div class="input-group">
                     <label for="username">請輸入帳號: </label>
-                    <input type="text" name="username" v-model="username" v-focus>
+                    <!-- 開啟頁面後，游標(輸入位置)自動聚焦到這個欄位上 -->
+                    <input type="text" name="username" v-model="username" v-focus> 
                 </div>
                 <div class="input-group">
                     <label for="password">請輸入密碼: </label>

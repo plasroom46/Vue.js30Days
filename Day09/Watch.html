@@ -46,8 +46,8 @@
         let vue = new Vue({
             el: '#app',
             data: {
-                firstName: 'c',
-                lastName: 'cw',
+                firstName: 'cw',
+                lastName: 'c',
                 arr: []
             },
             methods: {
@@ -64,10 +64,13 @@
                 }
             },
             watch: {
+                // 你要監聽的值，可以是data屬性的變數、或是computed計算後的值
                 firstName: function (val, oldVal) {
+                     // 傳入的函數中表示當值變動時，你所要執行的callback，其中第一個參數表示變動後的值
                     console.log(`the firstName has been change,the new value is ${val}`)
                     console.log(`the oldVal is ${oldVal}`)
                 },
+                // 監聽物件屬性
                 "arr.length": function (val) {
                     console.log(`the new length is ${val}`)
                 }

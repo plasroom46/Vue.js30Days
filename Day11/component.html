@@ -83,7 +83,8 @@
     <!-- after vue component -->
     <div id="app">
         <h1>My Todo List</h1>
-        <todo-list v-for="todo in todos" :key="todo.id" :todo="todo" @delete-todo="handleDeleteTodo">
+        <todo-list v-for="todo in todos" :key="todo.id" :todo="todo" @delete-todo="handleDeleteTodo"
+            @complete-todo="handleCompleteTodo">
         </todo-list>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
@@ -112,7 +113,7 @@
                   {{todo.title}}
                 </div>
                 <div class="todo-icons">
-                  <i class="fa fa-check" aria-hidden="true"></i>
+                  <i class="fa fa-check" aria-hidden="true" @click="completeTodo"></i>
                   <i class="fa fa-trash-alt" aria-hidden="true" @click="deleteTodo"></i> 
                 </div>
               </div>
@@ -125,9 +126,14 @@
             },
             methods: { // 加入methods屬性
                 deleteTodo() {
-                    this.$emit('delete-todo', {
+                    this.$emit('delete-todo', { // 大括弧內為外傳參數
                         title: this.todo.title
                     })
+                },
+                completeTodo() {
+                    this.$emit("complete-todo", { // 大括弧內為外傳參數
+                        title: this.todo.title
+                    });
                 }
             }
         });
@@ -146,9 +152,13 @@
                     this.todos = this.todos.filter(item => item.title !== title)
                 },
                 */
-                handleDeleteTodo(payload) {
+                handleDeleteTodo(payload) { // 接收參數
                     console.log(payload.title);
                     this.todos = this.todos.filter(item => item.title !== payload.title)
+                },
+                handleCompleteTodo({ title }) { // 接收參數
+                  const targetTodo = this.todos.find((item) => item.title === title);
+                  targetTodo.isComplete = !targetTodo.isComplete;
                 }
             }
         })

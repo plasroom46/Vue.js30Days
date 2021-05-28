@@ -1,6 +1,15 @@
 module.exports = {
   devServer: {
-    proxy: 'https://api.covidtracking.com/v1'
+    proxy: {
+      '/api': {
+        target: 'https://api.covidtracking.com/v1',
+        pathRewrite: {
+          '^/api': ''
+        },
+        changeOrigin: true,
+        ws: true
+      },
+    }
   },
   transpileDependencies: [
     'vuetify'
